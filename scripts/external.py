@@ -5,11 +5,26 @@ import datetime
 import time
 
 
+def get_db_connection(dbfile):
+    connection = sqlite3.connect(dbfile, detect_types=sqlite3.PARSE_DECLTYPES)
+    return connection
+
+
 def create_db_table(connection):
     cursor = connection.cursor()
     sql_query = 'CREATE TABLE IF NOT EXISTS outagehistory (record integer PRIMARY KEY AUTOINCREMENT,' \
                 ' outage_start TIMESTAMP, outage_end TIMESTAMP)'
     cursor.execute(sql_query)
+
+
+def outage_to_db(outage_start, outage_end):
+    connection = get_db_connection(db_file)
+    cursor = connection.cursor()
+    sql_query = "INSERT INTO outagehistory VALUES (NULL, ?, ?)"
+    sql_params = outage_start, outage_end
+    cursor.execute(sql_query, sql_params)
+    connection.commit()
+    connection.close()
 
 
 def check_internal_up(url):
@@ -47,6 +62,8 @@ def check_internal_control(url):
             # At this point an outage event has ended and we have start and end time
 
             time_delta_string = time_delta(outage_start, outage_end)
+            outage_to_db(outage_start, outage_end)
+
             
 
 
@@ -75,14 +92,6 @@ def time_delta(time_start, time_end):
     return return_string
 
 
-def get_outage_start():
-    print("blah")
-
-
-def get_outage_end():
-    print("blah")
-
-
 def get_outage_24h():
     print("blah")
 
@@ -103,3 +112,5 @@ def twitter_compose_message():
     print("blah")
 
 
+db_file = "/db/outagerecords.db"
+web_dir = "/usr/share/nginx/html/"
