@@ -30,6 +30,8 @@ docker run -d \
 --env TWITTER_API_SECRET=XXX \
 --env TWITTER_ACCESS_TOKEN=XXX \
 --env TWITTER_ACCESS_SECRET=XXX \
+--env TWITTER_TARGET_ACCOUNTS='@TargetAccount1 @TargetAccount2'
+--env TWITTER_TARGET_HASHTAGS='#MyHashtag #MyOtherHashtag'
 overallcoma/upcheck2
 ```
 # Environment Vars

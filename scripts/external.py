@@ -141,10 +141,10 @@ def create_daily_outage_tweet(outage_count):
 
 def create_daily_speedtest_tweet():
     speedtest_values = get_speed_24h()
-    tweet_string = """Speedtest average over last 24H:
-    DL - {0}
-    UL - {1}
-    Lat - {2}""".format(speedtest_values[0], speedtest_values[1], speedtest_values[2])
+    tweet_string = """Speedtest average over last 24 Hours:
+Download - {0}
+Upload - {1}
+Latency - {2}""".format(speedtest_values[0], speedtest_values[1], speedtest_values[2])
     print("Sending out the following tweet:")
     print(tweet_string)
     twitter_post(tweet_string)
@@ -187,7 +187,7 @@ db_connection = get_db_connection(db_file)
 create_db_table(db_connection)
 db_connection.close()
 
-schedule.every().day.at("12:15").do(twitter_post_daily)
+schedule.every().day.at("12:00").do(twitter_post_daily)
 while True:
     monitor()
     schedule.run_pending()
