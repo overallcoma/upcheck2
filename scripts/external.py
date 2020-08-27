@@ -115,8 +115,7 @@ def get_outage_24h():
     connection = get_db_connection(db_file)
     cursor = connection.cursor()
     yesterday = (datetime.datetime.now()) - (datetime.timedelta(days=1))
-    sql_query = "SELECT outage_start FROM outagehistory WHERE outage_start > ?", (yesterday,)
-    cursor.execute(sql_query)
+    cursor.execute("SELECT outage_start FROM outagehistory WHERE outage_start > ?", (yesterday,))
     outage_count = len(cursor.fetchall())
     connection.close()
     return outage_count
@@ -188,7 +187,7 @@ db_connection = get_db_connection(db_file)
 create_db_table(db_connection)
 db_connection.close()
 
-schedule.every().day.at("12:00").do(twitter_post_daily)
+schedule.every().day.at("12:15").do(twitter_post_daily)
 while True:
     monitor()
     schedule.run_pending()
