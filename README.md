@@ -2,8 +2,9 @@ This tool monitors the uptime of a target web server and reports to Twitter when
 
 Additionally includes speedtest monitoring and outage tracking.
 
-#Running UpCheck2
-###Internal Mode:
+# Running UpCheck2
+
+### Internal Mode:
 ```docker volume create upcheck2_internal```
 ```
 docker run -d \
@@ -15,7 +16,7 @@ docker run -d \
 --env TZ=America/Chicago
 overallcoma/upcheck2
 ```
-###External Mode:
+### External Mode:
 ```docker volume create upcheck2_external```
 ```
 docker run -d \
@@ -31,15 +32,15 @@ docker run -d \
 --env TWITTER_ACCESS_SECRET=XXX \
 overallcoma/upcheck2
 ```
-#Environment Vars
+# Environment Vars
 * `RUN_MODE`
-  * **`internal`** - The monitored web service
-  * **`external`** - The monitoring service  
-* **`TZ`** - Set timezone
+  * `internal` - The monitored web service
+  * `external` - The monitoring service  
+* `TZ` - Set timezone
 * **External Run Mode Environment Vars**
-  * **`MONITOR_URL`** - The URL to monitor for for status
+  * `MONITOR_URL` - The URL to monitor for for status
     * ex; `http://mydynamicdnsurl.com`
-  * **`TWITTER_API_KEY`** - Twitter API Key
-  * **`TWITTER_API_SECRET`** - Twitter API Secret
-  * **`TWITTER_ACCESS_TOKEN`** - Twitter Access Token
-  * **`TWITTER_ACCESS_SECRET`** - Twitter Access Token Secret 
+  * `TWITTER_API_KEY` - Twitter API Key
+  * `TWITTER_API_SECRET` - Twitter API Secret
+  * `TWITTER_ACCESS_TOKEN` - Twitter Access Token
+  * `TWITTER_ACCESS_SECRET` - Twitter Access Token Secret 
