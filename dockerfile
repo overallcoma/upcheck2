@@ -1,4 +1,4 @@
-FROM alpine
+FROM nginx:alpine
 
 LABEL maintainer="overallcoma <overallcoma@gmail.com>"
 
@@ -9,6 +9,6 @@ RUN pip3 install schedule speedtest-cli tzdata requests tweepy
 RUN mkdir /db/
 RUN mkdir /scripts/
 COPY scripts/ /scripts/
-COPY static/ /var/www/localhost/htdocs/
-
-ENTRYPOINT /scripts/entrypoint.sh
+RUN mv /scripts/start-upcheck2.sh /docker-entrypoint.d/start-upcheck2.sh
+RUN chmod +x /docker-entrypoint.d/start-upcheck2.sh
+COPY static/ /usr/share/nginx/html/

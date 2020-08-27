@@ -89,7 +89,9 @@ def speedtest_hourly_control():
     connection.close()
 
 
-schedule.every().hour.do(speedtest_hourly_control())
+schedule.every().hour.do(speedtest_hourly_control)
+#Run this once to get started
+speedtest_hourly_control()
 while True:
     schedule.run_pending()
     time.sleep(1)
